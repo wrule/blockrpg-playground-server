@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@koa/router@^8.0.1":
+  version "8.0.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/@koa/router/-/router-8.0.1.tgz#4d3efdb2e07cc3e78c21046a9ace6b9911ae441b"
+  integrity sha1-TT79suB8w+eMIQRqms5rmRGuRBs=
+  dependencies:
+    debug "^3.1.0"
+    http-errors "^1.3.1"
+    koa-compose "^3.0.0"
+    methods "^1.0.1"
+    path-to-regexp "^1.1.1"
+    urijs "^1.19.0"
+
 "@types/accepts@*":
   version "1.3.5"
   resolved "http://npm.perfma-inc.net/repository/npm-group/@types/accepts/-/accepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"
@@ -163,6 +175,11 @@ bluebird@^3.5.5:
   resolved "http://npm.perfma-inc.net/repository/npm-group/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
   integrity sha1-qNCv1zJR7/u9X+OEp31zADwXpx8=
 
+bytes@3.1.0:
+  version "3.1.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
+  integrity sha1-9s95M6Ng4FiPqf3oVlHNx/gF0fY=
+
 cache-content-type@^1.0.0:
   version "1.0.1"
   resolved "http://npm.perfma-inc.net/repository/npm-group/cache-content-type/-/cache-content-type-1.0.1.tgz#035cde2b08ee2129f4a8315ea8f00a00dba1453c"
@@ -175,6 +192,16 @@ callsite@1.0.0:
   version "1.0.0"
   resolved "http://npm.perfma-inc.net/repository/npm-group/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
   integrity sha1-KAOY5dZkvXQDi28JBRU+borxvCA=
+
+co-body@^6.0.0:
+  version "6.0.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/co-body/-/co-body-6.0.0.tgz#965b9337d7f5655480787471f4237664820827e3"
+  integrity sha1-lluTN9f1ZVSAeHRx9CN2ZIIIJ+M=
+  dependencies:
+    inflation "^2.0.0"
+    qs "^6.5.2"
+    raw-body "^2.3.3"
+    type-is "^1.6.16"
 
 co@^4.6.0:
   version "4.6.0"
@@ -220,6 +247,18 @@ cookies@~0.7.1:
   dependencies:
     depd "~1.1.2"
     keygrip "~1.0.3"
+
+copy-to@^2.0.1:
+  version "2.0.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/copy-to/-/copy-to-2.0.1.tgz#2680fbb8068a48d08656b6098092bdafc906f4a5"
+  integrity sha1-JoD7uAaKSNCGVrYJgJK9r8kG9KU=
+
+debug@^3.1.0:
+  version "3.2.6"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
+  integrity sha1-6D0X3hbYp++3cX7b5fsQE17uYps=
+  dependencies:
+    ms "^2.1.1"
 
 debug@~3.1.0:
   version "3.1.0"
@@ -347,7 +386,7 @@ http-assert@^1.3.0:
     deep-equal "~1.0.1"
     http-errors "~1.7.2"
 
-http-errors@^1.6.3, http-errors@~1.7.2:
+http-errors@1.7.3, http-errors@^1.3.1, http-errors@^1.6.3, http-errors@~1.7.2:
   version "1.7.3"
   resolved "http://npm.perfma-inc.net/repository/npm-group/http-errors/-/http-errors-1.7.3.tgz#6c619e4f9c60308c38519498c14fbb10aacebb06"
   integrity sha1-bGGeT5xgMIw4UZSYwU+7EKrOuwY=
@@ -357,6 +396,13 @@ http-errors@^1.6.3, http-errors@~1.7.2:
     setprototypeof "1.1.1"
     statuses ">= 1.5.0 < 2"
     toidentifier "1.0.0"
+
+iconv-lite@0.4.24:
+  version "0.4.24"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
+  integrity sha1-ICK0sl+93CHS9SSXSkdKr+czkIs=
+  dependencies:
+    safer-buffer ">= 2.1.2 < 3"
 
 iconv-lite@^0.5.0:
   version "0.5.0"
@@ -369,6 +415,11 @@ indexof@0.0.1:
   version "0.0.1"
   resolved "http://npm.perfma-inc.net/repository/npm-group/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
   integrity sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
+
+inflation@^2.0.0:
+  version "2.0.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/inflation/-/inflation-2.0.0.tgz#8b417e47c28f925a45133d914ca1fd389107f30f"
+  integrity sha1-i0F+R8KPklpFEz2RTKH9OJEH8w8=
 
 inherits@2.0.4:
   version "2.0.4"
@@ -385,6 +436,11 @@ is-property@^1.0.2:
   resolved "http://npm.perfma-inc.net/repository/npm-group/is-property/-/is-property-1.0.2.tgz#57fe1c4e48474edd65b09911f26b1cd4095dda84"
   integrity sha1-V/4cTkhHTt1lsJkR8msc1Ald2oQ=
 
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
+
 isarray@2.0.1:
   version "2.0.1"
   resolved "http://npm.perfma-inc.net/repository/npm-group/isarray/-/isarray-2.0.1.tgz#a37d94ed9cda2d59865c9f76fe596ee1f338741e"
@@ -394,6 +450,14 @@ keygrip@~1.0.3:
   version "1.0.3"
   resolved "http://npm.perfma-inc.net/repository/npm-group/keygrip/-/keygrip-1.0.3.tgz#399d709f0aed2bab0a059e0cdd3a5023a053e1dc"
   integrity sha1-OZ1wnwrtK6sKBZ4M3TpQI6BT4dw=
+
+koa-bodyparser@^4.2.1:
+  version "4.2.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/koa-bodyparser/-/koa-bodyparser-4.2.1.tgz#4d7dacb5e6db1106649b595d9e5ccb158b6f3b29"
+  integrity sha1-TX2stebbEQZkm1ldnlzLFYtvOyk=
+  dependencies:
+    co-body "^6.0.0"
+    copy-to "^2.0.1"
 
 koa-compose@^3.0.0:
   version "3.2.1"
@@ -474,6 +538,11 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "http://npm.perfma-inc.net/repository/npm-group/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
+
+methods@^1.0.1:
+  version "1.1.2"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
+  integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
 mime-db@1.40.0:
   version "1.40.0"
@@ -559,10 +628,32 @@ parseurl@^1.3.2:
   resolved "http://npm.perfma-inc.net/repository/npm-group/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha1-naGee+6NEt/wUT7Vt2lXeTvC6NQ=
 
+path-to-regexp@^1.1.1:
+  version "1.7.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
+  integrity sha1-Wf3g9DW62suhA6hOnTvGTpa5k30=
+  dependencies:
+    isarray "0.0.1"
+
 pseudomap@^1.0.2:
   version "1.0.2"
   resolved "http://npm.perfma-inc.net/repository/npm-group/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
   integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
+
+qs@^6.5.2:
+  version "6.8.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/qs/-/qs-6.8.0.tgz#87b763f0d37ca54200334cd57bb2ef8f68a1d081"
+  integrity sha1-h7dj8NN8pUIAM0zVe7Lvj2ih0IE=
+
+raw-body@^2.3.3:
+  version "2.4.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/raw-body/-/raw-body-2.4.1.tgz#30ac82f98bb5ae8c152e67149dac8d55153b168c"
+  integrity sha1-MKyC+Yu1rowVLmcUnayNVRU7Fow=
+  dependencies:
+    bytes "3.1.0"
+    http-errors "1.7.3"
+    iconv-lite "0.4.24"
+    unpipe "1.0.0"
 
 safe-buffer@5.1.2:
   version "5.1.2"
@@ -657,6 +748,16 @@ type-is@^1.6.16:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.24"
+
+unpipe@1.0.0:
+  version "1.0.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
+  integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
+
+urijs@^1.19.0:
+  version "1.19.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/urijs/-/urijs-1.19.1.tgz#5b0ff530c0cbde8386f6342235ba5ca6e995d25a"
+  integrity sha1-Ww/1MMDL3oOG9jQiNbpcpumV0lo=
 
 vary@^1.1.2:
   version "1.1.2"

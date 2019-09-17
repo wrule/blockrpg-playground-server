@@ -35,97 +35,77 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// get the client
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Koa = require('koa');
+var Router = require('@koa/router');
+var bodyParser = require('koa-bodyparser');
 var mysql = require('mysql2/promise');
-// get the promise implementation, we will use bluebird
 var bluebird = require('bluebird');
-function main() {
+var app = new Koa();
+var router = new Router();
+var Rsp_1 = __importDefault(require("./Middleware/Rsp"));
+var pool = null;
+function fetchBlock(x, y, w, h, mapId) {
+    if (x === void 0) { x = 0; }
+    if (y === void 0) { y = 0; }
+    if (w === void 0) { w = 3; }
+    if (h === void 0) { h = 3; }
+    if (mapId === void 0) { mapId = '1'; }
     return __awaiter(this, void 0, void 0, function () {
-        var connection, list, y, x, block, i, result;
+        var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, mysql.createConnection({
-                        host: 'localhost',
-                        user: 'root',
-                        password: 'gushihao',
-                        database: 'blockrpg',
-                        Promise: bluebird,
-                    })];
-                case 1:
-                    connection = _a.sent();
-                    list = [];
-                    for (y = -50; y <= 50; ++y) {
-                        for (x = -50; x <= 50; ++x) {
-                            block = {
-                                mapId: '1',
-                                x: x,
-                                y: y,
-                                resData: JSON.stringify(Array(20 * 12).fill(0).map(function (value, index) {
-                                    var isTree = Math.floor(Math.random() * 25) === 0;
-                                    return {
-                                        resId: 1,
-                                        resNum: isTree ? 9 : 1,
-                                        pass: !isTree,
-                                    };
-                                })),
-                            };
-                            list.push(block);
-                        }
+                case 0:
+                    if (w > 3 ||
+                        h > 3 ||
+                        w < 0 ||
+                        h < 0) {
+                        return [2 /*return*/, []];
                     }
-                    list.sort(function (a, b) {
-                        var adiff = Math.abs(a.x) + Math.abs(a.y);
-                        var bdiff = Math.abs(b.x) + Math.abs(b.y);
-                        return adiff - bdiff;
-                    });
-                    i = 0;
-                    _a.label = 2;
-                case 2:
-                    if (!(i < list.length)) return [3 /*break*/, 5];
-                    return [4 /*yield*/, connection.query('INSERT INTO mapBlock SET ?', list[i])];
-                case 3:
+                    return [4 /*yield*/, pool.query("\n    SELECT\n      x,\n      y,\n      resData\n    FROM\n      mapBlock\n    WHERE\n      x >= ? and\n      x < ? and\n      y >= ? and\n      y < ? and\n      mapId = ?\n  ", [x, x + w, y, y + w, mapId])];
+                case 1:
                     result = _a.sent();
-                    console.log(i);
-                    _a.label = 4;
-                case 4:
-                    ++i;
-                    return [3 /*break*/, 2];
-                case 5:
-                    console.log('over');
-                    return [2 /*return*/];
+                    return [2 /*return*/, result[0]];
             }
         });
     });
 }
+function main() {
+    return __awaiter(this, void 0, void 0, function () {
+        var _this = this;
+        return __generator(this, function (_a) {
+            pool = mysql.createPool({
+                connectionLimit: 100,
+                host: 'localhost',
+                user: 'root',
+                password: 'gushihao',
+                database: 'blockrpg',
+                Promise: bluebird,
+            });
+            router.post('/api/map/block', function (ctx, next) { return __awaiter(_this, void 0, void 0, function () {
+                var params, list;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            params = ctx.request.body;
+                            return [4 /*yield*/, fetchBlock(params.x, params.y, params.w, params.h, params.mapId)];
+                        case 1:
+                            list = _a.sent();
+                            Rsp_1.default.Success(ctx, list);
+                            return [2 /*return*/];
+                    }
+                });
+            }); });
+            app
+                .use(bodyParser())
+                .use(router.routes())
+                .use(router.allowedMethods());
+            app.listen(3000);
+            return [2 /*return*/];
+        });
+    });
+}
 main();
-// for (let y = -50; y <= 50; ++y) {
-//   for (let x = -50; x <= 50; ++x) {
-//     let block = {
-//       mapId: '1',
-//       x: x,
-//       y: y,
-//       resData: Array(20 * 12).fill(0).map((value, index) => {
-//         const isTree = Math.floor(Math.random() * 25) === 0;
-//         return {
-//           resId: 1,
-//           resNum: isTree ? 9 : 1,
-//           pass: !isTree,
-//         };
-//       })
-//     };
-//     console.log(block);
-//   }
-// }
-// import Koa from 'koa';
-// const app = new Koa();
-// // response
-// app.use(ctx => {
-//   ctx.body = 'Hello Koa';
-// });
-// app.listen(3000);
-// const server = require('http').createServer();
-// const io = require('socket.io')(server);
-// io.on('connection', client => {
-//   client.on('event', data => { /* … */ });
-//   client.on('disconnect', () => { /* … */ });
-// });
-// server.listen(3000);

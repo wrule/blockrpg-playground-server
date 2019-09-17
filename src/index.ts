@@ -1,98 +1,75 @@
-
-// get the client
+const Koa = require('koa');
+const Router = require('@koa/router');
+const bodyParser = require('koa-bodyparser');
 const mysql = require('mysql2/promise');
-
-// get the promise implementation, we will use bluebird
 const bluebird = require('bluebird');
 
+const app = new Koa();
+const router = new Router();
+
+import Rsp from './Middleware/Rsp';
+
+let pool = null;
+
+async function fetchBlock(
+  x: number = 0,
+  y: number = 0,
+  w: number = 3,
+  h: number = 3,
+  mapId: string = '1',
+): Promise<any[]> {
+  if (
+    w > 3 ||
+    h > 3 ||
+    w < 0 ||
+    h < 0) {
+    return [];
+  }
+  let result = await pool.query(`
+    SELECT
+      x,
+      y,
+      resData
+    FROM
+      mapBlock
+    WHERE
+      x >= ? and
+      x < ? and
+      y >= ? and
+      y < ? and
+      mapId = ?
+  `, [x, x + w, y, y + w, mapId]);
+  return result[0];
+}
+
 async function main() {
-  // create the connection, specify bluebird as Promise
-  const connection = await mysql.createConnection({
-    host:'localhost',
+  pool = mysql.createPool({
+    connectionLimit : 100,
+    host: 'localhost',
     user: 'root',
     password: 'gushihao',
     database: 'blockrpg',
     Promise: bluebird,
   });
 
-  let list = [];
-  for (let y = -50; y <= 50; ++y) {
-    for (let x = -50; x <= 50; ++x) {
-      let block = {
-        mapId: '1',
-        x: x,
-        y: y,
-        resData: JSON.stringify(Array(20 * 12).fill(0).map((value, index) => {
-          const isTree = Math.floor(Math.random() * 25) === 0;
-          return {
-            resId: 1,
-            resNum: isTree ? 9 : 1,
-            pass: !isTree,
-          };
-        })),
-      };
-      list.push(block);
-    }
-  }
-
-  list.sort((a, b) => {
-    let adiff = Math.abs(a.x) + Math.abs(a.y);
-    let bdiff = Math.abs(b.x) + Math.abs(b.y);
-    return adiff - bdiff;
+  router.post('/api/map/block', async (ctx, next) => {
+    let params = ctx.request.body;
+    let list = await fetchBlock(
+      params.x,
+      params.y,
+      params.w,
+      params.h,
+      params.mapId,
+    );
+    Rsp.Success(ctx, list);
   });
 
-  // query database
-  // const [rows, fields] = await connection.execute('select * from map1Block');
+  app
+    .use(bodyParser())
+    .use(router.routes())
+    .use(router.allowedMethods());
 
-  for (let i = 0; i < list.length; ++i) {
-    let result = await connection.query('INSERT INTO mapBlock SET ?', list[i]);
-    console.log(i);
-  }
-
-  console.log('over');
-  // console.log(result);
+  app.listen(3000);
 }
 
 main();
-
-
-
-
-
-// for (let y = -50; y <= 50; ++y) {
-//   for (let x = -50; x <= 50; ++x) {
-//     let block = {
-//       mapId: '1',
-//       x: x,
-//       y: y,
-//       resData: Array(20 * 12).fill(0).map((value, index) => {
-//         const isTree = Math.floor(Math.random() * 25) === 0;
-//         return {
-//           resId: 1,
-//           resNum: isTree ? 9 : 1,
-//           pass: !isTree,
-//         };
-//       })
-//     };
-//     console.log(block);
-//   }
-// }
-
-// import Koa from 'koa';
-// const app = new Koa();
-
-// // response
-// app.use(ctx => {
-//   ctx.body = 'Hello Koa';
-// });
-
-// app.listen(3000);
-
-
-// const server = require('http').createServer();
-// const io = require('socket.io')(server);
-// io.on('connection', client => {
-//   client.on('event', data => { /* … */ });
-//   client.on('disconnect', () => { /* … */ });
-// });
-// server.listen(3000);

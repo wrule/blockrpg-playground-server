@@ -11,9 +11,11 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "@koa/router": "^8.0.1",
     "@types/koa": "^2.0.49",
     "bluebird": "^3.5.5",
     "koa": "^2.8.1",
+    "koa-bodyparser": "^4.2.1",
     "mysql2": "^1.7.0",
     "socket.io": "^2.2.0"
   }
