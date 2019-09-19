@@ -38,7 +38,7 @@ async function fetchBlock(
       y >= ? and
       y < ? and
       mapId = ?
-  `, [x, x + w, y, y + w, mapId]);
+  `, [x, x + w, y, y + h, mapId]);
   return result[0];
 }
 

@@ -65,7 +65,7 @@ function fetchBlock(x, y, w, h, mapId) {
                         h < 0) {
                         return [2 /*return*/, []];
                     }
-                    return [4 /*yield*/, pool.query("\n    SELECT\n      x,\n      y,\n      resData\n    FROM\n      mapBlock\n    WHERE\n      x >= ? and\n      x < ? and\n      y >= ? and\n      y < ? and\n      mapId = ?\n  ", [x, x + w, y, y + w, mapId])];
+                    return [4 /*yield*/, pool.query("\n    SELECT\n      x,\n      y,\n      resData\n    FROM\n      mapBlock\n    WHERE\n      x >= ? and\n      x < ? and\n      y >= ? and\n      y < ? and\n      mapId = ?\n  ", [x, x + w, y, y + h, mapId])];
                 case 1:
                     result = _a.sent();
                     return [2 /*return*/, result[0]];
