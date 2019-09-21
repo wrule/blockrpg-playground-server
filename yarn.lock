@@ -768,6 +768,11 @@ urijs@^1.19.0:
   resolved "http://npm.perfma-inc.net/repository/npm-group/urijs/-/urijs-1.19.1.tgz#5b0ff530c0cbde8386f6342235ba5ca6e995d25a"
   integrity sha1-Ww/1MMDL3oOG9jQiNbpcpumV0lo=
 
+uuid@^3.3.3:
+  version "3.3.3"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
+  integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
+
 vary@^1.1.2:
   version "1.1.2"
   resolved "http://npm.perfma-inc.net/repository/npm-group/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
