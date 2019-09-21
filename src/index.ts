@@ -6,6 +6,17 @@ const bluebird = require('bluebird');
 
 const app = new Koa();
 const router = new Router();
+const server = require('http').createServer(app.callback());
+const wsio = require('socket.io')(server);
+
+wsio.on('connection', (socket) => {
+  setInterval(() => {
+    socket.emit('event', '客户端你好啊！');
+  }, 5000);
+  socket.on('event', (data) => {
+    console.log('从客户端接收到消息', data);
+  });
+});
 
 import Rsp from './Middleware/Rsp';
 
@@ -69,7 +80,7 @@ async function main() {
     .use(router.routes())
     .use(router.allowedMethods());
 
-  app.listen(3000);
+  server.listen(3000);
 }
 
 main();

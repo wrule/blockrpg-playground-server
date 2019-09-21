@@ -46,6 +46,16 @@ var mysql = require('mysql2/promise');
 var bluebird = require('bluebird');
 var app = new Koa();
 var router = new Router();
+var server = require('http').createServer(app.callback());
+var wsio = require('socket.io')(server);
+wsio.on('connection', function (socket) {
+    setInterval(function () {
+        socket.emit('event', '客户端你好啊！');
+    }, 5000);
+    socket.on('event', function (data) {
+        console.log('从客户端接收到消息', data);
+    });
+});
 var Rsp_1 = __importDefault(require("./Middleware/Rsp"));
 var pool = null;
 function fetchBlock(x, y, w, h, mapId) {
@@ -103,7 +113,7 @@ function main() {
                 .use(bodyParser())
                 .use(router.routes())
                 .use(router.allowedMethods());
-            app.listen(3000);
+            server.listen(3000);
             return [2 /*return*/];
         });
     });
