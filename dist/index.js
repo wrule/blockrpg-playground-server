@@ -44,18 +44,21 @@ var Router = require('@koa/router');
 var bodyParser = require('koa-bodyparser');
 var mysql = require('mysql2/promise');
 var bluebird = require('bluebird');
+var uuidv4 = require('uuid/v4');
 var app = new Koa();
 var router = new Router();
 var server = require('http').createServer(app.callback());
 var wsio = require('socket.io')(server);
-wsio.on('connection', function (socket) {
-    setInterval(function () {
-        socket.emit('event', '客户端你好啊！');
-    }, 5000);
-    socket.on('event', function (data) {
-        console.log('从客户端接收到消息', data);
-    });
-});
+var DBPool_1 = __importDefault(require("./Utils/DBPool"));
+console.log(DBPool_1.default);
+// wsio.on('connection', (socket) => {
+//   setInterval(() => {
+//     socket.emit('event', '客户端你好啊！');
+//   }, 5000);
+//   socket.on('event', (data) => {
+//     console.log('从客户端接收到消息', data);
+//   });
+// });
 var Rsp_1 = __importDefault(require("./Middleware/Rsp"));
 var pool = null;
 function fetchBlock(x, y, w, h, mapId) {
