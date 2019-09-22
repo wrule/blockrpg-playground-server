@@ -3,6 +3,7 @@ const Router = require('@koa/router');
 const bodyParser = require('koa-bodyparser');
 const mysql = require('mysql2/promise');
 const bluebird = require('bluebird');
+const uuidv4 = require('uuid/v4');
 
 const app = new Koa();
 const router = new Router();
