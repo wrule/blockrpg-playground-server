@@ -9,9 +9,8 @@ const router = new Router();
 const server = require('http').createServer(app.callback());
 const wsio = SocketIO(server);
 
-import DBPool from './Utils/DBPool';
-
-import { queryRectBLL } from './Entity/MapBlock/BLL';
+import MapBlockController from './Entity/MapBlock/Controller';
+import PlayerController from './Entity/Player/Controller';
 
 // wsio.on('connection', (socket) => {
 //   setInterval(() => {
@@ -22,24 +21,11 @@ import { queryRectBLL } from './Entity/MapBlock/BLL';
 //   });
 // });
 
-import Rsp from './Middleware/Rsp';
-
 async function main() {
-  router.post('/api/map/block', async (ctx: any, next: any) => {
-    let params = ctx.request.body;
-    let list = await queryRectBLL(
-      params.x,
-      params.y,
-      params.w,
-      params.h,
-      params.mapId,
-    );
-    Rsp.Success(ctx, list);
-  });
-
   app
     .use(KoaBodyParser())
-    .use(router.routes())
+    .use(PlayerController)
+    .use(MapBlockController)
     .use(router.allowedMethods());
 
   server.listen(3000);
