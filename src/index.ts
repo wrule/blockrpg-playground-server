@@ -1,9 +1,9 @@
-const Koa = require('koa');
-const Router = require('@koa/router');
-const bodyParser = require('koa-bodyparser');
+import Koa from 'koa';
+import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 const mysql = require('mysql2/promise');
-const bluebird = require('bluebird');
-const uuidv4 = require('uuid/v4');
+import bluebird from 'bluebird';
+import uuidv4 from 'uuid/v4';
 
 const app = new Koa();
 const router = new Router();
@@ -25,7 +25,7 @@ console.log(DBPool);
 
 import Rsp from './Middleware/Rsp';
 
-let pool = null;
+let pool: any = null;
 
 async function fetchBlock(
   x: number = 0,
@@ -68,7 +68,7 @@ async function main() {
     Promise: bluebird,
   });
 
-  router.post('/api/map/block', async (ctx, next) => {
+  router.post('/api/map/block', async (ctx: any, next: any) => {
     let params = ctx.request.body;
     let list = await fetchBlock(
       params.x,
