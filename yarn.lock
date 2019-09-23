@@ -2,18 +2,6 @@
 # yarn lockfile v1
 
 
-"@koa/router@^8.0.1":
-  version "8.0.1"
-  resolved "http://npm.perfma-inc.net/repository/npm-group/@koa/router/-/router-8.0.1.tgz#4d3efdb2e07cc3e78c21046a9ace6b9911ae441b"
-  integrity sha1-TT79suB8w+eMIQRqms5rmRGuRBs=
-  dependencies:
-    debug "^3.1.0"
-    http-errors "^1.3.1"
-    koa-compose "^3.0.0"
-    methods "^1.0.1"
-    path-to-regexp "^1.1.1"
-    urijs "^1.19.0"
-
 "@types/accepts@*":
   version "1.3.5"
   resolved "http://npm.perfma-inc.net/repository/npm-group/@types/accepts/-/accepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"
@@ -140,6 +128,13 @@
   dependencies:
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
+
+"@types/socket.io@^2.1.2":
+  version "2.1.2"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/@types/socket.io/-/socket.io-2.1.2.tgz#7165c2587cc3b86b44aa78e2a0060140551de211"
+  integrity sha1-cWXCWHzDuGtEqnjioAYBQFUd4hE=
+  dependencies:
+    "@types/node" "*"
 
 "@types/uuid@^3.4.5":
   version "3.4.5"

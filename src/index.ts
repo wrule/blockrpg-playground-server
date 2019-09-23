@@ -1,18 +1,17 @@
 import Koa from 'koa';
 import Router from 'koa-router';
-import bodyParser from 'koa-bodyparser';
-const mysql = require('mysql2/promise');
-import bluebird from 'bluebird';
-import uuidv4 from 'uuid/v4';
+import KoaBodyParser from 'koa-bodyparser';
+import UUIDV4 from 'uuid/v4';
+import SocketIO from 'socket.io';
 
 const app = new Koa();
 const router = new Router();
 const server = require('http').createServer(app.callback());
-const wsio = require('socket.io')(server);
+const wsio = SocketIO(server);
 
 import DBPool from './Utils/DBPool';
 
-console.log(DBPool);
+import { queryRectBLL } from './Entity/MapBlock/BLL';
 
 // wsio.on('connection', (socket) => {
 //   setInterval(() => {
@@ -25,52 +24,10 @@ console.log(DBPool);
 
 import Rsp from './Middleware/Rsp';
 
-let pool: any = null;
-
-async function fetchBlock(
-  x: number = 0,
-  y: number = 0,
-  w: number = 3,
-  h: number = 3,
-  mapId: string = '1',
-): Promise<any[]> {
-  if (
-    w > 3 ||
-    h > 3 ||
-    w < 0 ||
-    h < 0) {
-    return [];
-  }
-  let result = await pool.query(`
-    SELECT
-      x,
-      y,
-      resData
-    FROM
-      mapBlock
-    WHERE
-      x >= ? and
-      x < ? and
-      y >= ? and
-      y < ? and
-      mapId = ?
-  `, [x, x + w, y, y + h, mapId]);
-  return result[0];
-}
-
 async function main() {
-  pool = mysql.createPool({
-    connectionLimit : 100,
-    host: 'localhost',
-    user: 'root',
-    password: 'gushihao',
-    database: 'blockrpg',
-    Promise: bluebird,
-  });
-
   router.post('/api/map/block', async (ctx: any, next: any) => {
     let params = ctx.request.body;
-    let list = await fetchBlock(
+    let list = await queryRectBLL(
       params.x,
       params.y,
       params.w,
@@ -81,7 +38,7 @@ async function main() {
   });
 
   app
-    .use(bodyParser())
+    .use(KoaBodyParser())
     .use(router.routes())
     .use(router.allowedMethods());
 
