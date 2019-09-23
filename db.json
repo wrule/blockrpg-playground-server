@@ -1,7 +1,0 @@
-{
-  "connectionLimit" : 100,
-  "host": "localhost",
-  "user": "root",
-  "password": "gushihao",
-  "database": "blockrpg"
-}
