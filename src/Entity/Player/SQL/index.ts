@@ -11,12 +11,23 @@ export const QUERY_PLAYER = `
   SELECT
     uid,
     name,
+    image,
     x,
     y,
     dir,
     ges
-  from
+  FROM
     player
   WHERE
     uid = ?
+`;
+
+// 根据昵称查询玩家信息
+export const QUERY_PLAYER_BYNAME = `
+  SELECT
+    uid
+  FROM
+    player
+  WHERE
+    name = ?
 `;
