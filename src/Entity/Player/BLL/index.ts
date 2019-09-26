@@ -1,14 +1,20 @@
 
 import { queryPlayerDAL, insertPlayerDAL } from '../DAL';
 import Player from '../Model';
+import Dir from '../Model/Dir';
 import UUIDV4 from 'uuid/v4';
+import Rtv from '../../../Utils/Rtv';
 
-export async function registerPlayerBLL(name: string) {
-  const player = new Player(name, 9, 0, 0, 0, 0);
+// 新玩家注册逻辑
+export async function registerPlayerBLL(name: string): Promise<Rtv> {
+  const imageId = Math.floor(Math.random() * 14);
+  const player = new Player(name, imageId, 0, 0, Dir.DOWN, 0);
   player.UID = UUIDV4();
-  insertPlayerDAL(player);
+  const result = await insertPlayerDAL(player);
+  return result;
 }
 
+// 玩家登陆逻辑
 export async function playerLoginBLL(uid: string) {
   const result = await queryPlayerDAL(uid);
   if (result.length > 0) {
