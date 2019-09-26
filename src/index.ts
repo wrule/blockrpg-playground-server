@@ -12,14 +12,14 @@ const wsio = SocketIO(server);
 import MapBlockController from './Entity/MapBlock/Controller';
 import PlayerController from './Entity/Player/Controller';
 
-// wsio.on('connection', (socket) => {
-//   setInterval(() => {
-//     socket.emit('event', '客户端你好啊！');
-//   }, 5000);
-//   socket.on('event', (data) => {
-//     console.log('从客户端接收到消息', data);
-//   });
-// });
+wsio.on('connection', (socket) => {
+  setInterval(() => {
+    // socket.emit('event', '客户端你好啊！');
+  }, 5000);
+  socket.on('event', (data) => {
+    console.log('从客户端接收到消息', data);
+  });
+});
 
 async function main() {
   app
