@@ -2,7 +2,6 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import KoaBodyParser from 'koa-bodyparser';
 import SocketIO from 'socket.io';
-import RedisClient from './Utils/RedisClient';
 
 const app = new Koa();
 const router = new Router();
@@ -26,9 +25,6 @@ async function main() {
     .use(router.allowedMethods());
 
   server.listen(3000);
-
-  const a = await RedisClient.AsyncClient.getAsync('1234');
-  console.log(a);
 }
 
 main();
