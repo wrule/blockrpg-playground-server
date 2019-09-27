@@ -20,6 +20,7 @@
     "@types/socket.io": "^2.1.2",
     "@types/uuid": "^3.4.5",
     "bluebird": "^3.5.5",
+    "js-cookie": "^2.2.1",
     "koa": "^2.8.1",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",

@@ -486,6 +486,11 @@ isarray@2.0.1:
   resolved "http://npm.perfma-inc.net/repository/npm-group/isarray/-/isarray-2.0.1.tgz#a37d94ed9cda2d59865c9f76fe596ee1f338741e"
   integrity sha1-o32U7ZzaLVmGXJ92/llu4fM4dB4=
 
+js-cookie@^2.2.1:
+  version "2.2.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha1-aeEG3F1YBolFYpAqpbrsN0Tpsrg=
+
 keygrip@~1.0.3:
   version "1.0.3"
   resolved "http://npm.perfma-inc.net/repository/npm-group/keygrip/-/keygrip-1.0.3.tgz#399d709f0aed2bab0a059e0cdd3a5023a053e1dc"
