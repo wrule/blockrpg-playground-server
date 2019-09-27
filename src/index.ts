@@ -1,22 +1,19 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import KoaBodyParser from 'koa-bodyparser';
-import UUIDV4 from 'uuid/v4';
 import SocketIO from 'socket.io';
+import RedisClient from './Utils/RedisClient';
 
 const app = new Koa();
 const router = new Router();
 const server = require('http').createServer(app.callback());
-const wsio = SocketIO(server);
+const skio = SocketIO(server);
 
 import MapBlockController from './Entity/MapBlock/Controller';
 import PlayerController from './Entity/Player/Controller';
 
-wsio.on('connection', (socket) => {
-  setInterval(() => {
-    // socket.emit('event', '客户端你好啊！');
-  }, 5000);
-  socket.on('event', (data) => {
+skio.on('connection', (socket) => {
+  socket.on('playerUpdate', (data) => {
     console.log('从客户端接收到消息', data);
   });
 });
@@ -29,6 +26,9 @@ async function main() {
     .use(router.allowedMethods());
 
   server.listen(3000);
+
+  const a = await RedisClient.AsyncClient.getAsync('1234');
+  console.log(a);
 }
 
 main();
