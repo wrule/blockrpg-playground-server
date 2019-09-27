@@ -23,3 +23,14 @@ export async function playerLoginBLL(uid: string) {
     return null;
   }
 }
+
+// 玩家更新逻辑
+export async function playerUpdate(
+  session: string,
+  x: number,
+  y: number,
+  dir: number,
+  ges: number,
+) {
+
+}
