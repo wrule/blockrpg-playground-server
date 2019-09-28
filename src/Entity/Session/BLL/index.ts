@@ -11,7 +11,7 @@ export async function sessionSet(uid: string): Promise<string> {
   return uuid;
 }
 
-// 获取Session值
+// 获取Session值，此操作会更新Session的有效期
 export async function sessionGet(session: string): Promise<string> {
   const key = `session:${session}`;
   await sessionUpdate(session);

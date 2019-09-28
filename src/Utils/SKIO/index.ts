@@ -1,5 +1,4 @@
 import SocketIO from 'socket.io';
-import ReadCookieStr from '../ReadCookieStr';
 import cookie from 'cookie';
 import * as SessionBLL from '../../Entity/Session/BLL';
 
