@@ -5,6 +5,7 @@ import Dir from '../Model/Dir';
 import UUIDV4 from 'uuid/v4';
 import RedisClient from '../../../Utils/RedisClient';
 import Rtv from '../../../Utils/Rtv';
+import * as SessionBLL from '../../Session/BLL';
 
 // 新玩家注册逻辑
 // 输入姓名，注册玩家之后返回玩家的uid
@@ -21,10 +22,8 @@ export async function registerPlayerBLL(name: string): Promise<Rtv> {
 export async function playerLoginBLL(uid: string) {
   const result = await queryPlayerDAL(uid);
   if (result.length > 0) {
-    const session = UUIDV4();
     const player = result[0];
-    // 设置session有效时长20分钟
-    await RedisClient.Client.SETEX(`session:${session}`, 20 * 60, player.uid);
+    const session = await SessionBLL.sessionSet(player.uid);
     return {
       session,
       player,
