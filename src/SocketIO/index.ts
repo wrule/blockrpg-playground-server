@@ -1,4 +1,5 @@
 import SocketIO from 'socket.io';
+import cookie from 'cookie';
 
 export default class SocketIOCaller {
   // 全局的SocketIO
@@ -14,5 +15,11 @@ export default class SocketIOCaller {
     } else {
       return this.io as SocketIO.Server;
     }
+  }
+  // 读取存储在Socket之中Cookie值的方法
+  public static ReadCookie(socket: SocketIO.Socket, key: string): string | undefined {
+    const cookieText: string = socket.request.headers.cookie || '';
+    const value = cookie.parse(cookieText)[key];
+    return value;
   }
 }

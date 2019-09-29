@@ -9,7 +9,7 @@ export default (server: any, func: (socket: SocketIO.Socket, io: SocketIO.Server
     const cookieText: string = socket.request.headers.cookie || '';
     const session = cookie.parse(cookieText)['session'];
     if (session) {
-      const uid = await SessionBLL.sessionGet(session);
+      const uid = await SessionBLL.sessionGetUID(session);
       if (uid) {
         // Scoket.IO连接成功
         next();

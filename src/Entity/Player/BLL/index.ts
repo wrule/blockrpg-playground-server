@@ -23,7 +23,7 @@ export async function playerLoginBLL(uid: string) {
   const result = await queryPlayerDAL(uid);
   if (result.length > 0) {
     const player = result[0];
-    const session = await SessionBLL.sessionSet(player.uid);
+    const session = await SessionBLL.sessionSet(player.uid, player.name);
     return {
       session,
       player,

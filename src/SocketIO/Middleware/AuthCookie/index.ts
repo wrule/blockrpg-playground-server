@@ -1,14 +1,12 @@
 import SocketIO from 'socket.io';
-import cookie from 'cookie';
+import SocketIOCaller from '../../index';
 import * as SessionBLL from '../../../Entity/Session/BLL';
 
 export default async (socket: SocketIO.Socket, next: (err?: any) => void) => {
-  // 从cookie里面获取session并进行验证
-  const cookieText: string = socket.request.headers.cookie || '';
-  const session = cookie.parse(cookieText)['session'];
+  const session = SocketIOCaller.ReadCookie(socket, 'session');
   if (session) {
-    const uid = await SessionBLL.sessionGet(session);
-    if (uid) {
+    const result = await SessionBLL.sessionCheck(session);
+    if (result) {
       // Scoket.IO连接成功
       next();
     } else {
