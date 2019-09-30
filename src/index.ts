@@ -1,4 +1,4 @@
-import Koa from 'koa';
+import Koa, { ExtendableContext } from 'koa';
 import Router from 'koa-router';
 import KoaBodyParser from 'koa-bodyparser';
 // import SKIO from './Utils/SKIO';
@@ -11,8 +11,11 @@ const server = require('http').createServer(app.callback());
 
 import MapBlockController from './Entity/MapBlock/Controller';
 import PlayerController from './Entity/Player/Controller';
+import OutsideController from './Entity/Outside/Controller';
 import PlayerSocket from './Entity/Player/Socket';
 import ChatRoom from './SocketIO/ChatRoom';
+import compose from 'koa-compose';
+import AuthCookie from './Middleware/AuthCookie';
 
 // SKIO(server, (socket: SocketIO.Socket, io: SocketIO.Server) => {
 //   PlayerSocket(socket, io);
@@ -23,7 +26,8 @@ ChatRoom(SocketIOCaller.IO());
 async function main() {
   app
     .use(KoaBodyParser())
-    .use(PlayerController)
+    .use(OutsideController)
+    .use(AuthCookie)
     .use(MapBlockController)
     .use(router.allowedMethods());
 
