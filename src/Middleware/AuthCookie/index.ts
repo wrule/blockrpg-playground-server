@@ -12,6 +12,8 @@ export default async (
   if (session) {
     const result = await SessionBLL.sessionCheck(session);
     if (result) {
+      // 回填整理好的session
+      ctx.cookies.set('session', session);
       next();
     } else {
       Rsp.Error(ctx, 401, '未登录，无法访问');

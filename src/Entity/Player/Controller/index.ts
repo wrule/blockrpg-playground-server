@@ -1,41 +1,24 @@
 import Router from 'koa-router';
 import Rsp from '../../../Middleware/Rsp';
 import { playerLoginBLL, registerPlayerBLL } from '../BLL';
+import * as SessionBLL from '../../Session/BLL';
 
 const router = new Router();
 
-// 注册玩家
-// 注册成功之后会返回一个属于玩家的uid
-// 这个uid仅可以拿来登录
-router.post('/api/player/register', async (ctx, next) => {
-  const params = ctx.request.body;
-  const name: string = (params.name || '').trim();
-  if (name) {
-    if (name.length < 21) {
-      const result = await registerPlayerBLL(name.trim());
-      if (result.IsSuccess) {
-        Rsp.Success(ctx, result.Object);
-      } else {
-        Rsp.Fail(ctx, result.Message);
-      }
+// 获取玩家基本信息
+router.post('/api/player/info', async (ctx, next) => {
+  const session = ctx.cookies.get('session') as string;
+  // 从redis获取uid
+  const uid = await SessionBLL.sessionGetUID(session);
+  if (uid) {
+    const player = await playerLoginBLL(uid);
+    if (player) {
+      Rsp.Success(ctx, player);
     } else {
-      Rsp.Fail(ctx, '玩家昵称必须在20个字符以内');
+      Rsp.Fail(ctx, '没有找到玩家，无法获取玩家信息');
     }
   } else {
-    Rsp.Fail(ctx, '请输入玩家姓名');
-  }
-});
-
-// 登录玩家
-// 此操作会设置session并且返回玩家信息
-router.post('/api/player/login', async (ctx, next) => {
-  const params = ctx.request.body;
-  const uid = params.uid;
-  const player = await playerLoginBLL(uid);
-  if (player) {
-    Rsp.Success(ctx, player);
-  } else {
-    Rsp.Fail(ctx, '没有找到玩家信息，无法登陆');
+    Rsp.Fail(ctx, '没有找到玩家，无法获取玩家信息');
   }
 });
 
