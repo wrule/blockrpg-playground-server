@@ -13,7 +13,9 @@ export default async (
     const result = await SessionBLL.sessionCheck(session);
     if (result) {
       // 回填整理好的session
-      ctx.cookies.set('session', session);
+      ctx.cookies.set('session', session, {
+        httpOnly: false,
+      });
       return next();
     } else {
       Rsp.Error(ctx, 401, '未登录，无法访问');

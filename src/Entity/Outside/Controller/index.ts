@@ -37,7 +37,9 @@ router.post('/api/player/login', async (ctx, next) => {
     const result = await playerLoginBLL(uid);
     if (result) {
       // 服务端设置session
-      ctx.cookies.set('session', result.session);
+      ctx.cookies.set('session', result.session, {
+        httpOnly: false,
+      });
       Rsp.Success(ctx, result.player);
     } else {
       Rsp.Fail(ctx, '没有找到玩家信息，无法登陆');
