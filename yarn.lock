@@ -245,6 +245,11 @@ callsite@1.0.0:
   resolved "http://npm.perfma-inc.net/repository/npm-group/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
   integrity sha1-KAOY5dZkvXQDi28JBRU+borxvCA=
 
+cluster-key-slot@^1.1.0:
+  version "1.1.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/cluster-key-slot/-/cluster-key-slot-1.1.0.tgz#30474b2a981fb12172695833052bc0d01336d10d"
+  integrity sha1-MEdLKpgfsSFyaVgzBSvA0BM20Q0=
+
 co-body@^6.0.0:
   version "6.0.0"
   resolved "http://npm.perfma-inc.net/repository/npm-group/co-body/-/co-body-6.0.0.tgz#965b9337d7f5655480787471f4237664820827e3"
@@ -317,19 +322,19 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
+debug@^4.1.1, debug@~4.1.0:
+  version "4.1.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
+  integrity sha1-O3ImAlUQnGtYnO4FDx1RYTlmR5E=
+  dependencies:
+    ms "^2.1.1"
+
 debug@~3.1.0:
   version "3.1.0"
   resolved "http://npm.perfma-inc.net/repository/npm-group/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   integrity sha1-W7WgZyYotkFJVmuhaBnmFRjGcmE=
   dependencies:
     ms "2.0.0"
-
-debug@~4.1.0:
-  version "4.1.1"
-  resolved "http://npm.perfma-inc.net/repository/npm-group/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  integrity sha1-O3ImAlUQnGtYnO4FDx1RYTlmR5E=
-  dependencies:
-    ms "^2.1.1"
 
 deep-equal@~1.0.1:
   version "1.0.1"
@@ -341,7 +346,7 @@ delegates@^1.0.0:
   resolved "http://npm.perfma-inc.net/repository/npm-group/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
   integrity sha1-hMbhWbgZBP3KWaDvRM2HDTElD5o=
 
-denque@^1.4.1:
+denque@^1.1.0, denque@^1.4.1:
   version "1.4.1"
   resolved "http://npm.perfma-inc.net/repository/npm-group/denque/-/denque-1.4.1.tgz#6744ff7641c148c3f8a69c307e51235c1f4a37cf"
   integrity sha1-Z0T/dkHBSMP4ppwwflEjXB9KN88=
@@ -488,6 +493,21 @@ inherits@2.0.4:
   resolved "http://npm.perfma-inc.net/repository/npm-group/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha1-D6LGT5MpF8NDOg3tVTY6rjdBa3w=
 
+ioredis@^4.14.1:
+  version "4.14.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/ioredis/-/ioredis-4.14.1.tgz#b73ded95fcf220f106d33125a92ef6213aa31318"
+  integrity sha1-tz3tlfzyIPEG0zElqS72ITqjExg=
+  dependencies:
+    cluster-key-slot "^1.1.0"
+    debug "^4.1.1"
+    denque "^1.1.0"
+    lodash.defaults "^4.2.0"
+    lodash.flatten "^4.4.0"
+    redis-commands "1.5.0"
+    redis-errors "^1.2.0"
+    redis-parser "^3.0.0"
+    standard-as-callback "^2.0.1"
+
 is-generator-function@^1.0.7:
   version "1.0.7"
   resolved "http://npm.perfma-inc.net/repository/npm-group/is-generator-function/-/is-generator-function-1.0.7.tgz#d2132e529bb0000a7f80794d4bdf5cd5e5813522"
@@ -592,6 +612,16 @@ koa@^2.8.1:
     statuses "^1.5.0"
     type-is "^1.6.16"
     vary "^1.1.2"
+
+lodash.defaults@^4.2.0:
+  version "4.2.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
+  integrity sha1-0JF4cW/+pN3p5ft7N/bwgCJ0WAw=
+
+lodash.flatten@^4.4.0:
+  version "4.4.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
+  integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
 
 long@^4.0.0:
   version "4.0.0"
@@ -734,15 +764,27 @@ raw-body@^2.3.3:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-redis-commands@^1.2.0:
+redis-commands@1.5.0, redis-commands@^1.2.0:
   version "1.5.0"
   resolved "http://npm.perfma-inc.net/repository/npm-group/redis-commands/-/redis-commands-1.5.0.tgz#80d2e20698fe688f227127ff9e5164a7dd17e785"
   integrity sha1-gNLiBpj+aI8icSf/nlFkp90X54U=
+
+redis-errors@^1.0.0, redis-errors@^1.2.0:
+  version "1.2.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/redis-errors/-/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
+  integrity sha1-62LSrbFeTq9GEMBK/hUpOEJQq60=
 
 redis-parser@^2.6.0:
   version "2.6.0"
   resolved "http://npm.perfma-inc.net/repository/npm-group/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
   integrity sha1-Uu0J2srBCPGmMcB+m2mUHnoZUEs=
+
+redis-parser@^3.0.0:
+  version "3.0.0"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/redis-parser/-/redis-parser-3.0.0.tgz#b66d828cdcafe6b4b8a428a7def4c6bcac31c8b4"
+  integrity sha1-tm2CjNyv5rS4pCin3vTGvKwxyLQ=
+  dependencies:
+    redis-errors "^1.0.0"
 
 redis@^2.8.0:
   version "2.8.0"
@@ -832,6 +874,11 @@ sqlstring@^2.3.1:
   version "2.3.1"
   resolved "http://npm.perfma-inc.net/repository/npm-group/sqlstring/-/sqlstring-2.3.1.tgz#475393ff9e91479aea62dcaf0ca3d14983a7fb40"
   integrity sha1-R1OT/56RR5rqYtyvDKPRSYOn+0A=
+
+standard-as-callback@^2.0.1:
+  version "2.0.1"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/standard-as-callback/-/standard-as-callback-2.0.1.tgz#ed8bb25648e15831759b6023bdb87e6b60b38126"
+  integrity sha1-7YuyVkjhWDF1m2Ajvbh+a2CzgSY=
 
 "statuses@>= 1.5.0 < 2", statuses@^1.5.0:
   version "1.5.0"
