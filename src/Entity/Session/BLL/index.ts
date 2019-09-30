@@ -24,8 +24,17 @@ export async function sessionCheck(session: string): Promise<boolean> {
 export async function sessionGetUID(session: string): Promise<string> {
   const key = `session:${session}`;
   await sessionUpdate(session);
-  const uid = await RedisClient.AsyncClient.HGET(key, 'uid');
-  return uid;
+  return new Promise<string>((resolve, reject) => {
+    RedisClient.Client.HGET(key, 'uid', (err, value) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(value);
+      }
+    });
+  });
+  // const uid = await RedisClient.AsyncClient.HGET(key, 'uid');
+  // return uid;
 }
 
 // 获取Session的name，此操作会更新Session的有效期

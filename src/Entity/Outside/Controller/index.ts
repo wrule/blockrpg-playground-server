@@ -32,13 +32,16 @@ router.post('/api/player/login', async (ctx, next) => {
   const params = ctx.request.body;
   const uid = (params.uid || '').trim();
   if (!uid) {
-    Rsp.Fail(ctx, 'uid不存在');
-  }
-  const result = await playerLoginBLL(uid);
-  if (result) {
-    Rsp.Success(ctx, result);
+    Rsp.Fail(ctx, '玩家uid非法');
   } else {
-    Rsp.Fail(ctx, '没有找到玩家信息，无法登陆');
+    const result = await playerLoginBLL(uid);
+    if (result) {
+      // 服务端设置session
+      ctx.cookies.set('session', result.session);
+      Rsp.Success(ctx, result.player);
+    } else {
+      Rsp.Fail(ctx, '没有找到玩家信息，无法登陆');
+    }
   }
 });
 

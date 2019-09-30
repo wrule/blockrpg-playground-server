@@ -14,7 +14,7 @@ export default async (
     if (result) {
       // 回填整理好的session
       ctx.cookies.set('session', session);
-      next();
+      return next();
     } else {
       Rsp.Error(ctx, 401, '未登录，无法访问');
     }

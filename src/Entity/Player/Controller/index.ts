@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import Rsp from '../../../Middleware/Rsp';
-import { playerLoginBLL, registerPlayerBLL } from '../BLL';
+import { getPlayerInfoBLL } from '../BLL';
 import * as SessionBLL from '../../Session/BLL';
 
 const router = new Router();
@@ -11,14 +11,14 @@ router.post('/api/player/info', async (ctx, next) => {
   // 从redis获取uid
   const uid = await SessionBLL.sessionGetUID(session);
   if (uid) {
-    const player = await playerLoginBLL(uid);
+    const player = await getPlayerInfoBLL(uid);
     if (player) {
       Rsp.Success(ctx, player);
     } else {
       Rsp.Fail(ctx, '没有找到玩家，无法获取玩家信息');
     }
   } else {
-    Rsp.Fail(ctx, '没有找到玩家，无法获取玩家信息');
+    Rsp.Fail(ctx, '玩家未登录，无法获取玩家信息');
   }
 });
 
