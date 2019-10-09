@@ -1,11 +1,7 @@
-import redis from 'redis';
-import bluebird from 'bluebird';
+// 连接到主Redis的客户端
+import Redis from 'ioredis';
 import Config from '../../../config.json';
 
-bluebird.promisifyAll(redis);
-const client = redis.createClient(Config.redis);
+const client = new Redis(Config.redis);
 
-export default {
-  Client: client,
-  AsyncClient: client as any,
-};
+export default client;
