@@ -66,6 +66,13 @@
   resolved "http://npm.perfma-inc.net/repository/npm-group/@types/http-assert/-/http-assert-1.5.1.tgz#d775e93630c2469c2f980fc27e3143240335db3b"
   integrity sha1-13XpNjDCRpwvmA/CfjFDJAM12zs=
 
+"@types/ioredis@^4.0.18":
+  version "4.0.18"
+  resolved "http://npm.perfma-inc.net/repository/npm-group/@types/ioredis/-/ioredis-4.0.18.tgz#6c48f43cb03992960d724ab9e549d581d12e3a76"
+  integrity sha1-bEj0PLA5kpYNckq55UnVgdEuOnY=
+  dependencies:
+    "@types/node" "*"
+
 "@types/keygrip@*":
   version "1.0.1"
   resolved "http://npm.perfma-inc.net/repository/npm-group/@types/keygrip/-/keygrip-1.0.1.tgz#ff540462d2fb4d0a88441ceaf27d287b01c3d878"

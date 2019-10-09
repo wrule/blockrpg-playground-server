@@ -13,6 +13,7 @@
   "dependencies": {
     "@types/bluebird": "^3.5.27",
     "@types/cookie": "^0.3.3",
+    "@types/ioredis": "^4.0.18",
     "@types/koa": "^2.0.50",
     "@types/koa-bodyparser": "^4.3.0",
     "@types/koa-router": "^7.0.42",
