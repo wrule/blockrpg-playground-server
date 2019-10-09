@@ -1,3 +1,5 @@
+// 外部公开接口，主要负责玩家注册和登录功能
+// 其他接口必须要有正确的cookie才能访问
 import Router from 'koa-router';
 import Rsp from '../../../Middleware/Rsp';
 import { playerLoginBLL, registerPlayerBLL } from '../../Player/BLL';
@@ -6,7 +8,7 @@ const router = new Router();
 
 // 注册玩家
 // 注册成功之后会返回一个属于玩家的uid
-// 这个uid仅可以拿来登录
+// 这个uid仅可以拿来登录换取session
 router.post('/api/player/register', async (ctx, next) => {
   const params = ctx.request.body;
   const name: string = (params.name || '').trim();

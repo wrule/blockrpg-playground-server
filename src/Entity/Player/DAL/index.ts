@@ -31,7 +31,7 @@ export async function insertPlayerDAL(player: Player): Promise<Rtv> {
   }
 }
 
-// 查询玩家信息
+// 根据uid查询玩家信息
 export async function queryPlayerDAL(uid: string): Promise<any[]> {
   const result = await DBPool.query(QUERY_PLAYER, uid);
   return result[0];
