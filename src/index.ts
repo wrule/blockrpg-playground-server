@@ -17,9 +17,7 @@ import compose from 'koa-compose';
 import AuthCookie from './Middleware/AuthCookie';
 import PlayerController from './Entity/Player/Controller';
 
-// SKIO(server, (socket: SocketIO.Socket, io: SocketIO.Server) => {
-//   PlayerSocket(socket, io);
-// });
+// 初始化SocketIO服务
 SocketIOCaller.Init(server);
 ChatRoom(SocketIOCaller.IO());
 

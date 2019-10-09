@@ -1,3 +1,4 @@
+// 全局的SocketIO服务
 import SocketIO from 'socket.io';
 import cookie from 'cookie';
 

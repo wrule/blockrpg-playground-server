@@ -1,3 +1,4 @@
+// 应用于SocketIO的基于Cookie的Session权限拦截中间件
 import SocketIO from 'socket.io';
 import SocketIOCaller from '../../index';
 import * as SessionBLL from '../../../Entity/Session/BLL';
