@@ -17,14 +17,12 @@ export default (io: SocketIO.Server) => {
       const name = await SessionBLL.sessionGetName(session);
       // 如果玩家昵称存在
       if (name) {
-
         // 系统广播玩家上线消息
         console.log(`ChatRoom：${name} 客户端上线`);
-        socket.broadcast.emit('message', {
+        nsp.emit('message', {
           name: '系统消息',
-          message: `${name} 上线啦😁`,
+          message: `欢迎 ${name} 上线啦👏`,
         });
-
         // 广播玩家的个人消息
         socket.on('message', (data) => {
           let msg = (data || '') as string;
@@ -37,11 +35,10 @@ export default (io: SocketIO.Server) => {
             message: msg,
           });
         });
-
         // 系统广播玩家下线消息
         socket.on('disconnect', () => {
-          console.log(`ChatRoom：${name} 客户端下线`);
-          socket.broadcast.emit('message', {
+          // console.log(`ChatRoom：${name} 客户端下线`);
+          nsp.emit('message', {
             name: '系统消息',
             message: `${name} 下线`,
           });
