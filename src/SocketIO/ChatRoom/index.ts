@@ -27,6 +27,10 @@ export default (io: SocketIO.Server) => {
         // 等待客户端页面加载而后向自己发送欢迎消息
         setTimeout(() => {
           socket.emit('message', msgObj);
+          socket.emit('message', {
+            name: '系统消息',
+            message: '您可以在界面下方发送消息与其他玩家沟通，尝试一下吧😁',
+          });
         }, 100);
         // 广播玩家的个人消息
         socket.on('message', (data) => {
