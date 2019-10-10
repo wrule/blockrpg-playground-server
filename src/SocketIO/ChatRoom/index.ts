@@ -19,10 +19,15 @@ export default (io: SocketIO.Server) => {
       if (name) {
         // 系统广播玩家上线消息
         console.log(`ChatRoom：${name} 客户端上线`);
-        nsp.emit('message', {
+        const msgObj = {
           name: '系统消息',
           message: `欢迎 ${name} 上线啦👏`,
-        });
+        };
+        socket.broadcast.emit('message', msgObj);
+        // 等待客户端页面加载而后向自己发送欢迎消息
+        setTimeout(() => {
+          socket.emit('message', msgObj);
+        }, 100);
         // 广播玩家的个人消息
         socket.on('message', (data) => {
           let msg = (data || '') as string;
@@ -37,8 +42,8 @@ export default (io: SocketIO.Server) => {
         });
         // 系统广播玩家下线消息
         socket.on('disconnect', () => {
-          // console.log(`ChatRoom：${name} 客户端下线`);
-          nsp.emit('message', {
+          console.log(`ChatRoom：${name} 客户端下线`);
+          socket.broadcast.emit('message', {
             name: '系统消息',
             message: `${name} 下线`,
           });
