@@ -4,10 +4,14 @@ import RedisClient from '../../../Utils/RedisClient';
 const ValidityTime: number = (20 * 60);
 
 // 设置一个新的Session
-export async function sessionSet(uid: string, name: string): Promise<string> {
+export async function sessionSet(
+  uid: string,
+  name: string,
+  image: number
+): Promise<string> {
   const uuid = UUIDV4();
   const key = `session:${uuid}`;
-  RedisClient.hmset(key, ['uid', uid, 'name', name]);
+  RedisClient.hmset(key, ['uid', uid, 'name', name, 'image', image]);
   await sessionUpdate(uuid);
   return uuid;
 }

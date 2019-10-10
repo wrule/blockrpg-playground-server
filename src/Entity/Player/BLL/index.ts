@@ -34,7 +34,7 @@ export async function playerLoginBLL(uid: string) {
   const player = await getPlayerInfoBLL(uid);
   if (player) {
     // 在redis之中设置session
-    const session = await SessionBLL.sessionSet(player.uid, player.name);
+    const session = await SessionBLL.sessionSet(player.uid, player.name, player.image);
     return {
       session,
       player,

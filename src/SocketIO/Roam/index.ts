@@ -60,7 +60,9 @@ export default (io: SocketIO.Server) => {
       let curRoomIds: string[] = [];
       // 漫游事件，获取漫游数据
       socket.on('roam', (data) => {
+        // 根据空间坐标计算出玩家当前的block信息
         const block = getBlockSpace(data.x, data.y);
+        // 如果所在的block变化
         if (block.id !== curBlockId) {
           curBlockId = block.id;
           // 根据玩家当前所处的block计算出附近九宫格block的Ids
@@ -74,8 +76,16 @@ export default (io: SocketIO.Server) => {
             socket.leave(id);
           });
           curRoomIds = list;
-          console.log(joinRoomIds, leaveRoomIds);
         }
+        // 触发当前房间的漫游消息
+        socket.broadcast.to(block.id).emit('roam', {
+          name: player.name,
+          image: player.image,
+          x: data.x,
+          y: data.y,
+          dir: data.dir,
+          ges: data.ges,
+        });
       });
     }
   });
