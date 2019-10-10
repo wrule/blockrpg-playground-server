@@ -13,12 +13,14 @@ import MapBlockController from './Entity/MapBlock/Controller';
 import OutsideController from './Entity/Outside/Controller';
 import PlayerSocket from './Entity/Player/Socket';
 import ChatRoom from './SocketIO/ChatRoom';
+import Roam from './SocketIO/Roam';
 import compose from 'koa-compose';
 import AuthCookie from './Middleware/AuthCookie';
 import PlayerController from './Entity/Player/Controller';
 
 // 初始化SocketIO服务
 SocketIOCaller.Init(server);
+Roam(SocketIOCaller.IO());
 ChatRoom(SocketIOCaller.IO());
 
 async function main() {
